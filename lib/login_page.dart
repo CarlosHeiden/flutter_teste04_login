@@ -1,52 +1,64 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  // Controladores para capturar o texto digitado pelo usuário
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  // Controladores agora estão no State
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
 
   @override
+  void dispose() {
+    // Libera os recursos dos controladores
+    emailController.dispose();
+    senhaController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: const Text('Login')),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Centraliza o conteúdo verticalmente
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-              keyboardType: TextInputType.emailAddress, // Teclado otimizado para email
+              decoration: const InputDecoration(labelText: 'Email'),
+              keyboardType: TextInputType.emailAddress,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: senhaController,
-              decoration: InputDecoration(labelText: 'Senha'),
-              obscureText: true, // Esconde os caracteres digitados
+              decoration: const InputDecoration(labelText: 'Senha'),
+              obscureText: true,
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                // Verifica se os campos estão vazios
-                if (emailController.text.isEmpty || senhaController.text.isEmpty) {
+                if (emailController.text.isEmpty ||
+                    senhaController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Preencha todos os campos')),
+                    const SnackBar(content: Text('Preencha todos os campos')),
                   );
                   return;
                 }
-
-                // Navega para a tela de boas-vindas
                 Navigator.pushNamed(context, '/welcome');
               },
-              child: Text('Entrar'),
+              child: const Text('Entrar'),
             ),
-
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/register');
               },
-              child: Text('Não tem conta? Cadastre-se'),
+              child: const Text('Não tem conta? Cadastre-se'),
             ),
           ],
         ),

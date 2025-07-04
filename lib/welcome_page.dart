@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,10 +20,14 @@ class WelcomePage extends StatelessWidget {
               onPressed: () {
                 // Lógica de logout ou navegação para outra parte do app
                 // Neste exemplo, voltamos para a tela de login
-                Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/',
+                  (route) => false,
+                );
               },
               child: Text('Sair'),
-            )
+            ),
           ],
         ),
       ),
